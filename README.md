@@ -1,6 +1,8 @@
 # AI Research Agent
 
 [![CI](https://github.com/g070817/ai-research-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/g070817/ai-research-agent/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/g070817/ai-research-agent/branch/main/graph/badge.svg)](https://codecov.io/gh/g070817/ai-research-agent)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)
 ![LangChain](https://img.shields.io/badge/LangChain-1.x-0054f0)
 

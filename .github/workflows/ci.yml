@@ -32,5 +32,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev,web]"
 
-      - name: Run offline unit tests
-        run: pytest -q
+      - name: Run offline unit tests with coverage
+        # --cov=agent 统计 src/agent 的覆盖率；coverage.xml 供 Codecov 上传。
+        run: pytest -q --cov=agent --cov-report=xml --cov-report=term-missing
+
+      - name: Upload coverage to Codecov
+        # 公开仓库连接 codecov.io 后即显示真实覆盖率；未连接时失败也不阻断 CI。
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}  # 公开仓库可留空；接入后建议填 repo secret

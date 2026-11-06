@@ -1,0 +1,5 @@
+[run]
+source = agent
+# CLI 入口是 Typer 装配胶水，通常不做单测覆盖率统计；排除后覆盖率反映「可测逻辑」的真实水平。
+omit =
+    */__main__.py

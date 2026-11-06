@@ -17,6 +17,9 @@ env/
 # Generated artifacts
 .cache/
 .pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
 data/docs/*.tmp
 
 # OS
