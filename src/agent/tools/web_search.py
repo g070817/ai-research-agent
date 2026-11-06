@@ -62,7 +62,8 @@ def make_web_search_tool(
         try:
             with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
                 future = ex.submit(_search_once, query)
-                results = future.result(timeout=max(timeout, 6))  # 整体硬性超时
+                # 整体硬性超时：必须 > 内部单次超时，但尊重用户传入的更小 timeout（原代码写死 6s 会让该参数失效）
+                results = future.result(timeout=max(timeout, _DDGS_INTERNAL_TIMEOUT + 1))
         except concurrent.futures.TimeoutError:
             return (
                 "联网检索超时（网络不可达）。请勿重复调用本工具；"
