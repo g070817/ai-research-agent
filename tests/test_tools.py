@@ -46,21 +46,26 @@ def test_datetime_tool_returns_iso_string():
 
 
 def test_datetime_tool_uses_real_clock_when_mocked():
-    fixed = dt.datetime(
-        2026, 11, 3, 11, 30, 0, tzinfo=dt.timezone(dt.timedelta(hours=8))
-    )
+    # 固定一个 UTC 瞬时：2026-11-03 03:30 UTC == 2026-11-03 11:30 +08:00
+    fixed_utc = dt.datetime(2026, 11, 3, 3, 30, 0, tzinfo=dt.timezone.utc)
 
     # datetime.datetime 是 C 类型、不可变，不能直接 patch 其 now 方法；
     # 改为 patch 模块上的 `datetime` 属性（模块属性可重写）。
+    # 关键：假 now 必须“尊重 tz 参数”——真正的 datetime.now(tz) 会返回
+    # 该时区下的同一瞬时；否则 .astimezone() 会把时间错误换算成本机时区。
     class _FakeDatetime:
         @classmethod
         def now(cls, tz=None):
-            return fixed
+            return fixed_utc if tz is None else fixed_utc.astimezone(tz)
 
     with patch.object(dt_tool.dt, "datetime", _FakeDatetime):
         out = current_datetime.invoke({"query": ""})
-    assert "2026-11-03" in out
-    assert "11:30" in out
+
+    # 不依赖运行机时区：把输出解析回 UTC 瞬时，验证“被 mock 的时钟确实被采用”。
+    # 断言瞬时而非本地墙钟字符串（如 "11:30"）——后者在 UTC 机器上会变 "03:30"，
+    # 导致 CI（GitHub Actions 为 UTC）与本机（UTC+8）结果不一致。
+    parsed = dt.datetime.fromisoformat(out)
+    assert parsed.astimezone(dt.timezone.utc) == fixed_utc
 
 
 def test_web_search_tool_never_raises_without_dependency():
