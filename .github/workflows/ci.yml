@@ -1,0 +1,36 @@
+name: CI
+
+# 每次 push 到 main、或针对 main 开 PR 时自动触发。
+# 只跑离线单元测试（项目 pytest 配置已用 addopts 排除集成测试），
+# 无需任何 API key，零费用、可重复——是简历项目里最硬的「工程规范」加分项。
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]   # faiss-cpu 轮子齐全，覆盖主流版本
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,web]"
+
+      - name: Run offline unit tests
+        run: pytest -q

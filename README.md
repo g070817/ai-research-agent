@@ -1,5 +1,9 @@
 # AI Research Agent
 
+[![CI](https://github.com/g070817/ai-research-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/g070817/ai-research-agent/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)
+![LangChain](https://img.shields.io/badge/LangChain-1.x-0054f0)
+
 > 一个基于 **LangChain** 的可插拔工具调用（Tool-Calling）Agent，用于**本地知识库 RAG 问答**。  
 > 既是一份「学习 Agent 开发」的范例，也是一份可直接写进履历的、**测试完备**的工程项目。
 
@@ -83,6 +87,23 @@ python -m agent ask "LangChain 有哪些核心抽象？"     # 单问
 python -m agent chat                                 # 多轮交互
 python -m agent ask "星澜科技旗舰产品是哪年发布的？共几个档位？" --web
 ```
+
+<details>
+<summary>📸 示例输出（CLI）</summary>
+
+```text
+$ python -m agent ask "星澜科技旗舰产品是哪年发布的？"
+
+🔍 knowledge_search → 命中 3 段相关段落（FAISS top-3）
+🤖 星澜科技（成立于 2018 年，总部杭州）的旗舰产品「智核 Knowledge Hub」
+   于 2021 年正式发布，定位企业级本地知识库智能问答平台，
+   提供 RAG 检索、多轮记忆与可插拔 LLM 后端。
+
+$ python -m agent ask "帮我算一下 (2+3) 的 2 次方再开方"
+🤖 calculator → 25.0 的平方根为 5.0
+```
+
+</details>
 
 ### ⚠️ 联网检索与网络环境（必读）
 
