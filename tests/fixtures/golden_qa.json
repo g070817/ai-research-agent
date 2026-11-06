@@ -1,0 +1,27 @@
+[
+  {
+    "id": "q1_langchain_abstractions",
+    "question": "LangChain 包含哪些核心抽象？",
+    "expected_evidence": ["Models", "Prompts", "Chains", "Agents", "Memory", "Retrievers"]
+  },
+  {
+    "id": "q2_agent_react",
+    "question": "ReAct 模式的核心思想是什么？",
+    "expected_evidence": ["推理", "行动", "Reason", "Act"]
+  },
+  {
+    "id": "q3_company_launch_year",
+    "question": "星澜科技的旗舰产品是哪一年发布的？",
+    "expected_evidence": ["2021"]
+  },
+  {
+    "id": "q4_company_pricing_tiers",
+    "question": "智核 Knowledge Hub 一共有几个定价档位？",
+    "expected_evidence": ["3"]
+  },
+  {
+    "id": "q5_ai_testing_eval",
+    "question": "评估 AI 应用时，黄金数据集（Golden Dataset）有什么用？",
+    "expected_evidence": ["黄金数据集", "Golden Dataset", "召回率", "评估"]
+  }
+]

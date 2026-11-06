@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# Secrets & local config
+.env
+
+# Generated artifacts
+.cache/
+.pytest_cache/
+data/docs/*.tmp
+
+# OS
+.DS_Store
+
+# Sandbox session temp files (ephemeral artifacts, never commit)
+09pok2z1
+0j7tac5l
+7t7bhe83
+8icm71_9
+ap96ltfl
+bw64zl62
+bwoankys
+fxlo2rcs
+i0ad18fr
+k1_0fsgm
+kqvcyw1x
+kra96_oj
+psccj60a
+ub5y0igg
+ul10ammz
